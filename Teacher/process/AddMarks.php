@@ -7,7 +7,6 @@
         $term = $_POST['term'];
         $subject = $_POST['subject'];
         $marks = $_POST['marks'];
-        echo $admission,$rollno,$term,$subject,$marks;
         include_once("../include/connection.php");
         $sql = "INSERT INTO marks (admission, rollno, classWtSecId, termId, subjectId, marks) VALUES (?,?,?,?,?,?)";
                 if($stmt = mysqli_prepare($link, $sql))

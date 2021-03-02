@@ -62,7 +62,12 @@
                                         <input onfocus = "offValidate('<?php echo $adhaar; ?>')" type="text" placeholder = "Enter Marks..." class="form-control" id="<?php echo $row['adhaar']; ?>" aria-describedby="emailHelp">
                                     </div>
                                 </td>
-                                <td><button onclick = "submitMarks('<?php echo $rollno; ?>','<?php echo $row['admission']; ?>','<?php echo $adhaar; ?>')" class="btn btn-success">Submit</button></td>
+                                <td>
+                                    <button onclick = "submitMarks('<?php echo $rollno; ?>','<?php echo $row['admission']; ?>','<?php echo $adhaar; ?>')" class="btn btn-success" id="<?php echo $row['admission']; ?>-button">Submit</button>
+                                    <button class="delete btn btn-success d-none" type="button" id="<?php echo $row['admission']; ?>-delete" disabled>
+                                        <span class="spinner-border spinner-border-sm mb-1" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </td>
                             </tr> 
                         </tbody>
                         <?php
@@ -90,7 +95,12 @@
                                         <input onfocus = "offValidate('<?php echo $row['adhaar']; ?>')" type="text" placeholder = "Update Marks (<?php echo $row2['marks'] ?>)" class="form-control" id="<?php echo $row['adhaar']; ?>" aria-describedby="emailHelp">
                                     </div>
                                 </td>
-                                <td><button onclick ="updateMarks('<?php echo $rollno; ?>','<?php echo $row['admission']; ?>','<?php echo $adhaar; ?>')" class="btn btn-warning">Update</button></td>
+                                <td>
+                                    <button onclick ="updateMarks('<?php echo $rollno; ?>','<?php echo $row['admission']; ?>','<?php echo $adhaar; ?>')" class="btn btn-warning" id="<?php echo $row['admission']; ?>-button">Update</button>
+                                    <button class="delete btn btn-warning d-none" type="button" id="<?php echo $row['admission']; ?>-delete" disabled>
+                                        <span class="spinner-border spinner-border-sm mb-1" role="status" aria-hidden="true"></span>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                         <?php
@@ -103,7 +113,6 @@
         </table>
     </div>
 </div>
-
 
 
 <script>
@@ -120,11 +129,12 @@
             document.getElementById(adhaar).className += ' is-invalid';
         }
         else{
+            ajaxstart_delButton(admission);
             $("#resul").load("process/AddMarks.php", {classCode: classCode, admission: admission, rollno: rollno, term: term, subject: subject, marks: marks, submit: "set"}, function(){
                 $("#ajax-table").load("Ajax/MarksTable.php", {Class: '<?php echo $Class; ?>', term: term, Submit: 'set'},function(){
-            $("#deleteMessage").load("message/deleteMessage.php");
+                    $("#deleteMessage").load("message/deleteMessage.php");
                 });
-        });
+            });
         // console.log(admission,rollno);
     }
     }
@@ -141,11 +151,12 @@
             document.getElementById(adhaar).className += ' is-invalid';
         }
         else{
+            ajaxstart_delButton(admission);
             $("#resul").load("process/UpdateMarks.php", {classCode: classCode, admission: admission, rollno: rollno, term: term, subject: subject, marks: marks, submit: "set"}, function(){
                 $("#ajax-table").load("Ajax/MarksTable.php", {Class: '<?php echo $Class; ?>', term: term, Submit: 'set'},function(){
-            $("#deleteMessage").load("message/deleteMessage.php");
+                    $("#deleteMessage").load("message/deleteMessage.php");
                 });
-        });
+            });
         // console.log(classCode,admission,rollno,term,subject,marks);
     }
     }

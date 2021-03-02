@@ -108,9 +108,11 @@
         }
 
         if(Class.value != "Nill" && term.value != "Nill"){
-            
+            ajaxstart_subButton();
             $("#ajax-table").load("Ajax/MarksTable.php", {Class: Class.value, term: term.value, Submit: 'set'},function(){
-                $('#message').load("message/message.php");
+                $('#message').load("message/message.php",{}, function(){
+                    ajaxstop_subButton();
+                });
             });
         }
         return false;
@@ -119,15 +121,6 @@
     function offValidate(param){
         document.getElementById(param).classList.remove("is-invalid");
     }
-
-    $(document).ajaxStart(function(){
-            $(".load").css("display", "block");
-            $(".sub").css("display", "none");
-            });
-    $(document).ajaxComplete(function(){
-            $(".sub").css("display", "block");
-            $(".load").css("display", "none");
-            });
 </script>
 
 
