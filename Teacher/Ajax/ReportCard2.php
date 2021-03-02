@@ -1,4 +1,4 @@
-<?php 
+<?php
     session_start();
     $class = $_SESSION['TeachersClass'];    
 ?>
@@ -46,8 +46,10 @@
     <script>
     
     function result(para){
-
-        $("#main").load("Ajax/Term.php", {adminNo: para});
+        ajaxCallStart();
+        $("#main").load("Ajax/Term.php", {adminNo: para}, function(){
+            ajaxCallStop();
+        });
 
     }
     
