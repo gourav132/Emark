@@ -4,7 +4,7 @@
     include_once("../include/connection.php");
 
     // Classes
-    $sql = "SELECT * FROM teachersclass";
+    $sql = "SELECT * FROM teachersclass WHERE teacherid = '$teacherId'";
     $result = mysqli_query($link, $sql);
     $row = mysqli_num_rows($result);
     $class = "";
@@ -98,9 +98,9 @@
         }
 
         if(Class.value != "Nill" && term.value != "Nill"){
-            
+            ajaxstart_subButton();
             $("#ajax-table").load("Ajax/ViewMarksTable.php", {Class: Class.value, term: term.value, Submit: 'set'},function(){
-                // $('#message').load("message/message.php");
+                ajaxstop_subButton();
             });
         }
         return false;
@@ -110,14 +110,6 @@
         document.getElementById(param).classList.remove("is-invalid");
     }
 
-    $(document).ajaxStart(function(){
-            $(".load").css("display", "block");
-            $(".sub").css("display", "none");
-            });
-    $(document).ajaxComplete(function(){
-            $(".sub").css("display", "block");
-            $(".load").css("display", "none");
-            });
 </script>
 
 
