@@ -85,8 +85,11 @@
             email.classList.add("is-invalid");
         }
         else{
+            ajaxstart_subButton();
             $("#email-result").load("Process/ChangeEmail.php",{email: email.value, submit: "set"}, function(){
-                $("#email-message").load("message/message.php");
+                $("#email-message").load("message/message.php",{}, function(){
+                    ajaxstop_subButton()
+                });
             });
         }
         return false
@@ -113,9 +116,11 @@
             $(".incorrect").show();
         }
         if(currentPasswd.value != "" && newPasswd.value != "" && newPasswd.value == confirmPasswd.value){
-
+            ajaxstart_subButton();
             $("#passwd-result").load("Process/ChangePasswd.php", {current: currentPasswd.value, new: newPasswd.value, Submit: 'set'},function(){
-                $('#passwd-message').load("message/message.php");
+                $('#passwd-message').load("message/message.php",{}, function(){
+                    ajaxstop_subButton();
+                });
             });
         }
         return false;
@@ -126,13 +131,5 @@
         $(".incorrect").hide();
     }
 
-    $(document).ajaxStart(function(){
-            $(".load").css("display", "block");
-            $(".sub").css("display", "none");
-            });
-    $(document).ajaxComplete(function(){
-            $(".sub").css("display", "block");
-            $(".load").css("display", "none");
-            });
 </script>
 
