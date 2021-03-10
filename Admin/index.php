@@ -108,7 +108,7 @@
 
 </style>
 
-<div class="loading uk-flex uk-flex-center uk-flex-middle d-none">
+<div class="loading fixed-top uk-flex uk-flex-center uk-flex-middle d-none">
 
   <div class="loading-bar uk-flex uk-flex-center uk-flex-middle">
   
